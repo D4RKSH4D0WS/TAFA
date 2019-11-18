@@ -337,17 +337,17 @@ try:
 	home()
 except r.exceptions.ConnectionError:
 	echo("[!] Signal Error")
-	sys.exit()
+	exit()
 except ValueError:
 	print()
 	echo("[!] Wrong Input / Process Force Stopped")
 	enter()
 except KeyboardInterrupt:
 	echo("[!] Exit: Ok")
-	sys.exit()
+	exit()
 except ImportError as e:
 	echo("[!] " + str(e))
-	sys.exit()
+	exit()
 except Exception as e:
 	echo("[!] " + str(e))
-	sys.exit()
+	exit()
