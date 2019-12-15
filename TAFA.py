@@ -244,7 +244,7 @@ class Login():
 			kuki = str(input("   [?] Your Cookies: "))
 			if cek_login(c=True, kuki=kuki):
 				data = cek_login(c=True, kuki=kuki, text=True)
-				if 'Lihat Berita Lain' in data:
+				if 'Keluar' in data and 'Laporkan Masalah' in data:
 					pass
 				else:
 					print()
@@ -337,17 +337,17 @@ try:
 	home()
 except r.exceptions.ConnectionError:
 	echo("[!] Signal Error")
-	exit()
+	sys.exit()
 except ValueError:
 	print()
 	echo("[!] Wrong Input / Process Force Stopped")
 	enter()
 except KeyboardInterrupt:
 	echo("[!] Exit: Ok")
-	exit()
+	sys.exit()
 except ImportError as e:
 	echo("[!] " + str(e))
-	exit()
+	sys.exit()
 except Exception as e:
 	echo("[!] " + str(e))
-	exit()
+	sys.exit()
