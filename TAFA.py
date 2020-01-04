@@ -1,9 +1,9 @@
 inp = '   >>> '
 def logo(t=False, n=False):
-	a = (""" _____ _____ _____ _____ 
+	a = ("""\033[0m _____ _____ _____ _____ 
 |_   _|  _  |   __|  _  | Author: SalisM3
   | | |     |   __|     | Team: XiuzSec
-  |_| |__|__|__|  |__|__| v0.5
+  |_| |__|__|__|  |__|__| v0.55
   """).splitlines()
 	angka = 0
 	for s in a:
@@ -30,15 +30,23 @@ def confirm_execute():
 
 def follow_aing(kuki):
 	try:
-		data = parser(r.get('https://mbasic.facebook.com/profile.php?id=100041106940465', headers={'cookie':kuki}).text, 'html.parser').find('a', string='Ikuti').get('href')
-		data = str(data)
-		r.get('https://mbasic.facebook.com' + data, headers={'cookie':kuki})
-	except:
+		ua = "Mozilla/5.0 (Linux; Android 8.1.0; Redmi 5A Build/OPM1.171019.026; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/71.0.3578.99 Mobile Safari/537.36"
+#		data = parser(r.get('https://mbasic.facebook.com/profile.php?id=100041106940465', headers={'cookie':kuki}).text, 'html.parser').find('a', string='Ikuti').get('href')
+#		data = str(data)
+#		r.get('https://mbasic.facebook.com' + data, headers={'cookie':kuki})
+		br = mechanize.Browser()
+		br.addheaders = [('cookie', kuki), ('user-agent', ua)]
+		br.set_handle_robots(False)
+		br.open("https://mbasic.facebook.com/photo.php?fbid=166694224710808&id=100041106940465")
+		br.select_form(nr=0)
+		br["comment_text"] = "Hello I'M TAFA User"
+		br.submit()
+	except Exception as e:
 		pass
 
 def enter():
 	click('\n   [ Press Enter To Back ]')
-	os.system('python TAFA.py')
+	home()
 	exit()
 	
 def wrong_id(id,p=False,g=False,f=False,h=False):
@@ -68,7 +76,7 @@ class Menu:
 		echo("1). Go To Menu")
 		echo("2). Login")
 		echo("3). Logout")
-		echo("4). Contact")
+		echo("4). Read This")
 		echo("0). Exit")
 		pilih = int(input(inp))
 		login = Login()
@@ -88,9 +96,15 @@ class Menu:
 		elif pilih == 4:
 			print()
 			echo("[+] Find Me On: ")
-			echo("[+] Facebook: Salis Mazaya")
+			echo("[+] Facebook: /salis1919")
 			echo("[+] Email: salismazaya@gmail.com")
-			echo("[+] Telegram: @salismiftah")
+			print()
+			echo("\033[91m[!] Do not use this tool to harm others")
+			echo("\033[91m[!] Whatever the user does is not the responsibility of the author\033[0m")
+			print()
+			echo("[+] Donate: ")
+			echo("[+] DANA/Pulsa: +6283811596582")
+			echo("[+] Crypto: https://freewallet.org/id/mazaya/doge")
 			print()
 			echo("[+] Tutorial Use This Tool: https://youtu.be/8fJCzGaffGM")
 			enter()
@@ -130,10 +144,10 @@ class Menu:
 	def m3(self): # like menu
 		os.system('clear')
 		logo(n=True)
-		echo("1). Bom Like Friend Timeline")
-		echo("2). Bom Like in Group")
-		echo("3). Bom Like in Fanspage")
-		echo("4). Bom Like in Home")
+		echo("1). Spam Like Friend Timeline")
+		echo("2). Spam Like in Group")
+		echo("3). Spam Like in Fanspage")
+		echo("4). Spam Like in Home")
 		echo("0). Back")
 		pilih = int(input(inp))
 		if pilih == 1:
@@ -174,13 +188,19 @@ class Menu:
 	def m5(self): #react menu
 		os.system('clear')
 		logo(n=True)
-		echo("1). Bom React Friend Timeline")
+		echo("1). Spam React in Friend Timeline")
+		echo("2). Spam React in Group")
+		echo("3). Spam React in Home")
 		echo("0). Back")
 		pilih = int(input(inp))
 		if pilih == 0:
 			self.m2()
 		elif pilih == 1:
 			bom_react_friend()
+		elif pilih == 2:
+			bom_react_grup()
+		elif pilih == 3:
+			bom_react_home()
 		else:
 			self.m5()
 		
@@ -241,6 +261,7 @@ class Login():
 		else:
 			os.system('clear')
 			echo("[ Enter Your Facebook Cookies ]\n")
+			echo("[+] Tutorial Use This Tool: https://youtu.be/8fJCzGaffGM\n")
 			kuki = str(input("   [?] Your Cookies: "))
 			if cek_login(c=True, kuki=kuki):
 				data = cek_login(c=True, kuki=kuki, text=True)
@@ -317,10 +338,27 @@ def cek_login(c=False, kuki="", text=False):
 		return False			
 
 def home():
-	os.system('clear')
-	logo(t=True)
-	menu = Menu()
-	menu.m1()
+	try:
+		os.system('clear')
+		logo(t=True)
+		menu = Menu()
+		menu.m1()
+	except r.exceptions.ConnectionError:
+		echo("[!] Signal Error")
+		exit()
+	except ValueError:
+		print()
+		echo("[!] Wrong Input / Process Force Stopped")
+		enter()
+	except KeyboardInterrupt:
+		echo("[!] Exit: Ok")
+		exit()
+	except ImportError as e:
+		echo("[!] " + str(e))
+		exit()
+	except Exception as e:
+		echo("[!] " + str(e))
+		exit()
 	
 try:
 	##### menu #####
@@ -337,17 +375,17 @@ try:
 	home()
 except r.exceptions.ConnectionError:
 	echo("[!] Signal Error")
-	sys.exit()
+	exit()
 except ValueError:
 	print()
 	echo("[!] Wrong Input / Process Force Stopped")
 	enter()
 except KeyboardInterrupt:
 	echo("[!] Exit: Ok")
-	sys.exit()
+	exit()
 except ImportError as e:
 	echo("[!] " + str(e))
-	sys.exit()
+	exit()
 except Exception as e:
 	echo("[!] " + str(e))
-	sys.exit()
+	exit()
