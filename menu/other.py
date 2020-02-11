@@ -1,17 +1,17 @@
 def hapus_msg():
 	gas = Other()
-	confirm_execute()
+	confirm_execute("menu.m7")
 	gas.dump_sts_wclass('https://mbasic.facebook.com/messages', True, 'Lihat Pesan Sebelumnya', 0, 'messages/read', href_na=True)
 	echo("[+] Total: " + str(len(gas.id)))
 	gas.hapus_msg()
 	print()
 	echo("[+] Done!")
-	enter()
+	enter("menu.m7")
 
 def downloader():
 	try: os.mkdir('output')
 	except: pass
-	os.system('clear')
+	os.system('cls' if os.name == "nt" else 'clear')
 	logo(n=True)
 	menu = Menu()
 	gas = Other()
@@ -34,15 +34,15 @@ def downloader():
 		url = str(input("   [?] Album Url (use mbasic fb): "))
 		if not 'mbasic.facebook.com' in url:
 			echo("[+] Url Not Valid")
-			enter()
+			enter("menu.m7")
 		elif not 'https://' in url or 'http://' in url:
 			echo("[+] Url Not Valid")
-			enter()
+			enter("menu.m7")
 		data = gas.o_url(url)
 		nama = str(parser(data, 'html.parser').find('title')).replace('<title>', '').replace('</title>', '')
 		if 'Konten Tidak Ditemukan' == nama:
 			echo("[+] Album Not Found")
-			enter()
+			enter("menu.m7")
 		echo("[+] Album Name: " + nama)
 		tempat = url.split("/")[-2]
 		os.chdir('output')
@@ -65,5 +65,5 @@ def download_proces(url, path):
 	gas.download(path)
 	print()
 	echo(f"[+] Done! photos saved in {path}")
-	enter()
+	enter("menu.m7")
 		

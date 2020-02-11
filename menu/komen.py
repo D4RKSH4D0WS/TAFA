@@ -3,7 +3,7 @@ def spam_komen_friend():
 		id = str(input("   [?] Id Target: "))
 		if wrong_id(id,p=True):
 			print("   [+] Invalid Id")
-			enter()
+			enter("menu.m6")
 		msg = str(input("   [?] Comment: "))
 		limit = int(input("   [?] Limit (int): "))
 		if limit <= 0 or limit > 150:
@@ -13,14 +13,14 @@ def spam_komen_friend():
 		print("   [+] Total: " + str(len(gas.id)))
 		gas.hajar(msg, 0)
 		print("\n   [+] Done!")
-		enter()
+		enter("menu.m6")
 
 def spam_komen_grup():
 		gas = Komen()
 		id = str(input("   [?] Id Group: "))
 		if wrong_id(id,g=True):
 			print("   [+] Invalid Id")
-			enter()
+			enter("menu.m6")
 		msg = str(input("   [?] Comment: "))
 		limit = int(input("   [?] Limit (int): "))
 		if limit <= 0 or limit > 150:
@@ -32,14 +32,14 @@ def spam_komen_grup():
 		gas.hajar(msg, 1)
 		print()
 		echo("[+] Done!")
-		enter()
+		enter("menu.m6")
 
 def spam_komen_halaman():
 		gas = Komen()
 		id = str(input("   [?] Username Fanspage: "))
 		if wrong_id(id,f=True):
 			print("   [+] Invalid Id")
-			enter()
+			enter("menu.m6")
 		msg = str(input("   [?] Comment: "))
 		limit = int(input("   [?] Limit (int): "))
 		if limit <= 0 or limit > 150:
@@ -50,7 +50,7 @@ def spam_komen_halaman():
 		gas.hajar(msg, 0)
 		print()
 		echo("[+] Done!")
-		enter()
+		enter("menu.m6")
 
 def spam_komen_home():
 	gas = Komen()
@@ -65,4 +65,4 @@ def spam_komen_home():
 	gas.hajar(msg, 0)
 	print()
 	echo("[+] Done!")
-	enter()
+	enter("menu.m6")

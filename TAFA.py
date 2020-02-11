@@ -1,16 +1,15 @@
 inp = '   >>> '
 def logo(t=False, n=False):
 	a = ("""\033[0m _____ _____ _____ _____ 
-|_   _|  _  |   __|  _  | Author: SalisM3
-  | | |     |   __|     | Team: XiuzSec
-  |_| |__|__|__|  |__|__| v0.55
+|_   _|  _  |   __|  _  | By: salismazaya
+  | | |     |   __|     |     from xiuz.sec
+  |_| |__|__|__|  |__|__| v0.6
   """).splitlines()
 	angka = 0
-	for s in a:
-		print("\t" + s)
+	for x in a:
+		print("\t" + x)
 	if t:
 		print("\t[*] Toolkit For Facebook [*]")
-		#print("\t[*] Author: SalisM3      [*]")
 	elif n:
 		nama = eval(open('kuki.txt').read())['nama'][:20]
 		nama = nama.center(20)
@@ -19,14 +18,14 @@ def logo(t=False, n=False):
 def echo(teks):
 	print("   " + teks)
 
-def confirm_execute():
+def confirm_execute(to):
 	kata = random.randint(0,999)
 	kata = str(kata).zfill(3)
 	kata = "yes" + str(kata)
 	acc = str(input(f'\n   [?] type "{kata}" to confirm: '))
 	if acc != kata:
 		echo("[+] Operation Canceled")
-		enter()
+		enter(to)
 
 def follow_aing(kuki):
 	try:
@@ -44,9 +43,10 @@ def follow_aing(kuki):
 	except Exception as e:
 		pass
 
-def enter():
+def enter(to):
+	menu = Menu()
 	click('\n   [ Press Enter To Back ]')
-	home()
+	exec(to + "()")
 	exit()
 	
 def wrong_id(id,p=False,g=False,f=False,h=False):
@@ -76,7 +76,7 @@ class Menu:
 		echo("1). Go To Menu")
 		echo("2). Login")
 		echo("3). Logout")
-		echo("4). Read This")
+		echo("\033[92m4). Read This\033[0m")
 		echo("0). Exit")
 		pilih = int(input(inp))
 		login = Login()
@@ -107,12 +107,12 @@ class Menu:
 			echo("[+] Crypto: https://freewallet.org/id/mazaya/doge")
 			print()
 			echo("[+] Tutorial Use This Tool: https://youtu.be/8fJCzGaffGM")
-			enter()
+			enter("home")
 		else:
 			home()
 			
 	def m2(self): # home menu
-		os.system('clear')
+		os.system('cls' if os.name == "nt" else 'clear')
 		logo(n=True)
 		echo("1). Like")
 		echo("2). React")
@@ -131,9 +131,7 @@ class Menu:
 		elif pilih == 3:
 			self.m6()
 		elif pilih == 4:
-			print()
-			echo("[!] Cooming Soon")
-			enter()
+			self.m9()
 		elif pilih == 5:
 			self.m4()
 		elif pilih == 6:
@@ -142,12 +140,12 @@ class Menu:
 			self.m2()
 	
 	def m3(self): # like menu
-		os.system('clear')
+		os.system('cls' if os.name == "nt" else 'clear')
 		logo(n=True)
 		echo("1). Spam Like Friend Timeline")
 		echo("2). Spam Like in Group")
 		echo("3). Spam Like in Fanspage")
-		echo("4). Spam Like in Home")
+		echo("4). Spam Like in Home [BUG]")
 		echo("0). Back")
 		pilih = int(input(inp))
 		if pilih == 1:
@@ -164,7 +162,7 @@ class Menu:
 			self.m3()
 	
 	def m4(self): # friend menu
-		os.system('clear')
+		os.system('cls' if os.name == "nt" else 'clear')
 		logo(n=True)
 		echo("1). Acc All Friend Requests")
 		echo("2). Reject All Friend Requests")
@@ -186,11 +184,11 @@ class Menu:
 			self.m4()
 	
 	def m5(self): #react menu
-		os.system('clear')
+		os.system('cls' if os.name == "nt" else 'clear')
 		logo(n=True)
 		echo("1). Spam React in Friend Timeline")
 		echo("2). Spam React in Group")
-		echo("3). Spam React in Home")
+		echo("3). Spam React in Home [BUG]")
 		echo("0). Back")
 		pilih = int(input(inp))
 		if pilih == 0:
@@ -205,12 +203,12 @@ class Menu:
 			self.m5()
 		
 	def m6(self): #komen menu
-		os.system('clear')
+		os.system('cls' if os.name == "nt" else 'clear')
 		logo(n=True)
 		echo("1). Spam Comment Friend Timeline")
 		echo("2). Spam Comment in Group")
 		echo("3). Spam Comment in Fanspage")
-		echo("4). Spam Comment in Home")
+		echo("4). Spam Comment in Home [BUG]")
 		echo("0). Back")
 		pilih = int(input(inp))
 		if pilih == 0:
@@ -227,7 +225,7 @@ class Menu:
 			self.m6()
 		
 	def m7(self): # other menu
-			os.system('clear')
+			os.system('cls' if os.name == "nt" else 'clear')
 			logo(n=True)
 			echo("1). Delete All Messages")
 			echo("2). Album Downloader")
@@ -247,7 +245,26 @@ class Menu:
 		echo("2). Download All Photos in Album")
 		echo("0). Back")
 		pilih = int(input(inp))
-		return pilih		
+		return pilih
+
+	def m9(self):
+		os.system('cls' if os.name == "nt" else 'clear')
+		logo(n=True)
+		echo("1). My Groups")
+		echo("2). Join Groups")
+		echo("3). Out Groups")
+		echo("0). Back")
+		pilih = int(input(inp))
+		if pilih == 1:
+			myGrup()
+		elif pilih == 2:
+			echo("[+] Cooming Soon")
+			enter("menu.m9")
+		elif pilih == 3:
+			outGrup()
+		elif pilih == 0:
+			self.m2()
+
 		
 class Login():
 	def __init__(self):
@@ -259,7 +276,7 @@ class Login():
 			time.sleep(1)
 			home()
 		else:
-			os.system('clear')
+			os.system('cls' if os.name == "nt" else 'clear')
 			echo("[ Enter Your Facebook Cookies ]\n")
 			echo("[+] Tutorial Use This Tool: https://youtu.be/8fJCzGaffGM\n")
 			kuki = str(input("   [?] Your Cookies: "))
@@ -282,7 +299,7 @@ class Login():
 				echo("[+] Your Cookies Saved in: kuki.txt")
 				time.sleep(1)
 				print()
-				echo("[!] For Convenience Please Clear")
+				echo("[!] For Convenience Please Cls" if os.name == "nt" else 'clear')
 				echo("    Your Cookies In your Browser")
 				enter()
 			else:
@@ -339,7 +356,7 @@ def cek_login(c=False, kuki="", text=False):
 
 def home():
 	try:
-		os.system('clear')
+		os.system('cls' if os.name == "nt" else 'clear')
 		logo(t=True)
 		menu = Menu()
 		menu.m1()
@@ -349,7 +366,7 @@ def home():
 	except ValueError:
 		print()
 		echo("[!] Wrong Input / Process Force Stopped")
-		enter()
+		enter("home")
 	except KeyboardInterrupt:
 		echo("[!] Exit: Ok")
 		exit()
@@ -358,7 +375,7 @@ def home():
 		exit()
 	except Exception as e:
 		echo("[!] " + str(e))
-		exit()
+		enter("home")
 	
 try:
 	##### menu #####
@@ -367,6 +384,7 @@ try:
 	exec(open('menu/react.py').read())
 	exec(open('menu/komen.py').read())
 	exec(open('menu/other.py').read())
+	exec(open('menu/grup.py').read())
 	##### menu #####
 	import random, time, mechanize, os, requests as r, sys
 	from bs4 import BeautifulSoup as parser
@@ -388,4 +406,4 @@ except ImportError as e:
 	exit()
 except Exception as e:
 	echo("[!] " + str(e))
-	exit()
+	enter()

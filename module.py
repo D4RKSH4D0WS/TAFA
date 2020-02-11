@@ -62,10 +62,12 @@ class Core:
 			return "form error"
 		
 	def mo_url(self, url):
-		br = mechanize.Browser()
-		br.set_handle_robots(False)
-		br.addheaders = [('Cookie', self.kuki), ('User-Agent', 'Mozilla/5.0 (Linux; Android 8.1.0; Redmi 5A) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.73 Mobile Safari/537.36')]
-		return str(br.open(url).read())
+		self.br = mechanize.Browser()
+		self.br.set_handle_robots(False)
+		self.br.addheaders = [('Cookie', self.kuki), ('User-Agent', 'Mozilla/5.0 (Linux; Android 8.1.0; Redmi 5A) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.73 Mobile Safari/537.36')]
+		data = self.br.open(url)
+		self.br._factory.is_html = True
+		return data.read().decode()
 	
 	def o_url(self, url, bytes=False):
 		data = r.get(url, headers={'User-Agent':'Mozilla/5.0 (Linux; Android 8.1.0; Redmi 5A) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.73 Mobile Safari/537.36', 'Cookie':self.kuki})
@@ -125,6 +127,7 @@ class Core:
 					penentu += 1
 					break
 			next = b.find('a', string=stri2)
+			# print(next)
 			if "None" in str(next):
 				break
 			else:
@@ -237,6 +240,7 @@ class Other(Information):
 		self.id.clear()
 	
 	def tampilkan_album(self):
+		kaluar = False
 		data = parser(self.mo_url('https://mbasic.facebook.com/me/photos'), 'html.parser').find_all('a', href=True)
 		jumlah = 0
 		for s in data:
@@ -251,11 +255,12 @@ class Other(Information):
 		echo("0" * len(jumlah) + "). Back")
 		del jumlah, nama_album
 		while True:
+			if kaluar: exit()
 			try:
 				pilih = int(input(inp))
 				if pilih == 0:
+					kaluar = True
 					enter()
-					break
 				self.album = self.id[pilih - 1]
 				break
 			except:
@@ -264,4 +269,25 @@ class Other(Information):
 	
 	def download_album(self):
 		pass
-			
+
+class Grup(Information):
+	def getListGrup(self, forOut = True, query = None, limit = None):
+		self.id = []
+		if forOut:
+			data = self.o_url("https://mbasic.facebook.com/groups/?seemore")
+			data = parser(data, "html.parser").find_all("a", href = lambda x: "/groups/ in x" and x.count("=") == 1)
+			for x in data:
+				tupel = x.text, "https://mbasic.facebook.com/group/leave/?group_id=" + x["href"].split("/")[2].split("?")[0]
+				self.id.append(tupel)
+			all = [x[1] for x in self.id]
+			self.id.append(("All", all))
+		else:
+			url = f"https://mbasic.facebook.com/search/groups/?q={query}&source=filter&isTrending=0"
+			self.dump_sts(url, "Gabung", "Lihat Hasil Selanjutnya", limit, "/join")
+	
+	def out(self, url):
+		self.mo_url(url)
+		self.br.select_form(nr=1)
+		self.br.submit()
+
+	

@@ -2,7 +2,7 @@ def bom_like_friend():
 	id = str(input("   [?] Id Target: "))
 	if wrong_id(id,p=True):
 		print("   [+] Invalid Id")
-		enter()
+		enter("menu.m3")
 	limit = int(input("   [?] Limit (int): "))
 	gas = Like()
 	print("\n   [+] Spamming Like To: " + gas.get_name(id))
@@ -10,13 +10,13 @@ def bom_like_friend():
 	print("   [+] Total: " + str(len(gas.id)))
 	gas.hajar()
 	print("\n   [+] Done!")
-	enter()
+	enter("menu.m3")
 
 def bom_like_grup():
 	id = str(input("   [?] Id Group: "))
 	if wrong_id(id,g=True):
 		print("   [+] Invalid Id")
-		enter()
+		enter("menu.m3")
 	limit = int(input("   [?] Limit (int): "))
 	if limit > 1000 or limit <= 0:
 		limit = 1000
@@ -26,13 +26,13 @@ def bom_like_grup():
 	print("   [+] Total: " + str(len(gas.id)))
 	gas.hajar()
 	print("\n   [+] Done!")
-	enter()
+	enter("menu.m3")
 	
 def bom_like_halaman():
 	id = str(input("   [?] Username Fanspage: "))
 	if wrong_id(id,f=True):
 		print("   [+] Invalid Username")
-		enter()
+		enter("menu.m3")
 	limit = int(input("   [?] Limit (int): "))
 	if limit > 1000 or limit <= 0:
 		limit = 1000
@@ -42,7 +42,7 @@ def bom_like_halaman():
 	gas.hajar()
 	print()
 	echo("[+] Done!")
-	enter()
+	enter("menu.m3")
 
 def bom_like_home():
 	limit = int(input("   [?] Limit (int): "))
@@ -55,4 +55,4 @@ def bom_like_home():
 	gas.hajar()
 	print()
 	echo("[+] Done!")
-	enter()
+	enter("menu.m3")

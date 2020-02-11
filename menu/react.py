@@ -2,7 +2,7 @@ def bom_react_friend():
 	id = str(input("   [?] Id Target: "))
 	if wrong_id(id,p=True):
 		print("   [+] Invalid Id")
-		enter()
+		enter("menu.m5")
 	limit = int(input("   [?] Limit (int): "))
 	print("   1). Super")
 	print("   2). Haha")
@@ -19,13 +19,13 @@ def bom_react_friend():
 	print("   [+] Total: " + str(len(gas.id)))
 	gas.hajar(pilih)
 	print("\n   [+] Done!")
-	enter()
+	enter("menu.m5")
 
 def bom_react_grup():
 	id = str(input("   [?] Id Group: "))
 	if wrong_id(id,g=True):
 		print("   [+] Invalid Id")
-		enter()
+		enter("menu.m5")
 	limit = int(input("   [?] Limit (int): "))
 	print("   1). Super")
 	print("   2). Haha")
@@ -42,7 +42,7 @@ def bom_react_grup():
 	print("   [+] Total: " + str(len(gas.id)))
 	gas.hajar(pilih)
 	print("\n   [+] Done!")
-	enter()
+	enter("menu.m5")
 
 def bom_react_home():
 	limit = int(input("   [?] Limit (int): "))
@@ -61,4 +61,4 @@ def bom_react_home():
 	print("   [+] Total: " + str(len(gas.id)))
 	gas.hajar(pilih)
 	print("\n   [+] Done!")
-	enter()
+	enter("menu.m5")
