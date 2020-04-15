@@ -1,6 +1,6 @@
 ![TAFA](https://raw.githubusercontent.com/salismazaya/TAFA/master/tafa.png)
 
-## requirments
+## requirements
 ```
 - python 3.6 or higher
 - module requests
